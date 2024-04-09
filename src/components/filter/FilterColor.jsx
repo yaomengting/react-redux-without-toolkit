@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { changeColorFilter } from '../../redux/reducers/filterReducer';
+import { changeColorFilter, changeColorFilterAsync } from '../../redux/reducers/filterReducer';
 
 export default function FilterColor() {
   const filters = useSelector((state) => state.filters);
@@ -11,7 +11,7 @@ export default function FilterColor() {
     const newSelectedColors = isSelected
     ? filters.colors.filter(c => c !== color)
     : [...filters.colors, color];
-    dispatch(changeColorFilter(newSelectedColors));
+    dispatch(changeColorFilterAsync(newSelectedColors));
   }
   return (
     <div className="color-filters">

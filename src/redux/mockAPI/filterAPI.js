@@ -9,10 +9,18 @@ const filterAPI = {
     filters.status = status;
     return {
       success: true,
-      message: "change status filter",
+      message: "changed status filter",
       data: filters
     }
   },
+  changeColorFilter: async(colors)=> {
+    filters.colors = colors;
+    return {
+      success: true,
+      message: "changed color filter",
+      data: filters
+    }
+  }
 }
 
 

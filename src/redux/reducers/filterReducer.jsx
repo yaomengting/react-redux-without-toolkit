@@ -28,6 +28,15 @@ export const changeStatusFilterAsync = (status) => {
   }
 }
 
+export const changeColorFilterAsync = (colors) => {
+  console.log("changeColorFilterAsync triggered...")
+  return async (dispatch) => {
+    console.log("changeColorFilterAsync returned...")
+    await filterAPI.changeColorFilter(colors);
+    dispatch(changeColorFilter(colors));
+  }
+}
+
 export function changeStatusFilter(status) {
 return { type: "CHANGE_STATUS_FILTER", payload: status }
 }
