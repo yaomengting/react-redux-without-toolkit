@@ -86,6 +86,15 @@ export const markAllCompletedAsync = () => {
   }
 }
 
+export const clearCompletedAsync = () => {
+  console.log(" clearCompletedAsync triggered...")
+  return async (dispatch) => {
+    console.log(" clearCompletedAsync returned...")
+    const response = await todosAPI.clearCompleted();
+    dispatch(clearCompleted());
+  }
+}
+
 
 export function markAllCompleted() {
   return { type: "MARK_ALL_COMPLETED" };

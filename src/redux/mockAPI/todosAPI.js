@@ -66,6 +66,14 @@ const todosAPI = {
       message: "mark All To do Completed",
       data: todos
     }
+  },
+  clearCompleted: async() => {
+    todos.filter(todo=> todo.completed == false);
+    return {
+      success: true,
+      message: "clear Completed",
+      data: todos
+    }
   }
   
 
