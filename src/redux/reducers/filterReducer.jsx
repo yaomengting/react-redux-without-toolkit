@@ -1,3 +1,5 @@
+import filterAPI from "../mockAPI/filterAPI";
+
 const filterState = {
   status: "All",
   colors: []
@@ -15,6 +17,15 @@ switch (action.type){
   default:
     return state;
 }
+}
+
+export const changeStatusFilterAsync = (status) => {
+  console.log("changeStatusFilterAsync triggered...")
+  return async (dispatch) => {
+    console.log("changeStatusFilterAsync returned...")
+    await filterAPI.changeStatusFilter(status);
+    dispatch(changeStatusFilter(status));
+  }
 }
 
 export function changeStatusFilter(status) {

@@ -80,8 +80,7 @@ export const markAllCompletedAsync = () => {
   console.log(" markAllCompletedAsync triggered...")
   return async (dispatch) => {
     console.log(" markAllCompletedAsync returned...")
-    const response = await todosAPI.markAllCompleted();
-    console.log("response: ", response)
+    await todosAPI.markAllCompleted();
     dispatch(markAllCompleted());
   }
 }
@@ -90,18 +89,9 @@ export const clearCompletedAsync = () => {
   console.log(" clearCompletedAsync triggered...")
   return async (dispatch) => {
     console.log(" clearCompletedAsync returned...")
-    const response = await todosAPI.clearCompleted();
+   await todosAPI.clearCompleted();
     dispatch(clearCompleted());
   }
-}
-
-
-export function markAllCompleted() {
-  return { type: "MARK_ALL_COMPLETED" };
-}
-
-export function clearCompleted() {
-  return { type: "CLEAR_COMPLETED" };
 }
 
 const setTodos = (todos) => ({
@@ -125,4 +115,11 @@ export function toggleComplete(id) {
 
 export function toggleColor(id, color) {
   return { type: "TOGGLE_COLOR", payload: { id, color } }
+}
+export function markAllCompleted() {
+  return { type: "MARK_ALL_COMPLETED" };
+}
+
+export function clearCompleted() {
+  return { type: "CLEAR_COMPLETED" };
 }
