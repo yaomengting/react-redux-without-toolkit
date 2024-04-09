@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToDo, toggleComplete, toggleColor, changeStatusFilter, changeColorFilter, markAllCompleted, clearCompleted } from './redux/reducers/todoReducer';
+import { addToDo, toggleComplete, toggleColor, changeStatusFilter, changeColorFilter, markAllCompleted, clearCompleted, getTodosAsync } from './redux/reducers/todoReducer';
 export default function Todos() {
   const { todos, filters } = useSelector((state) => state.todos);
   console.log("todos: ", todos)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTodosAsync());
+  }, [dispatch]);
   const [title, setTitle] = useState('');
   const [color, setColor] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);

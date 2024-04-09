@@ -1,18 +1,17 @@
 import shortid from "shortid";
+import todosAPI from "../mockAPI/todosAPI";
 const todoAppState = {
-  todos: [
-    { id: 0, title: 'Learn React', completed: true },
-    { id: 1, title: 'Learn Redux', completed: false, color: 'purple' },
-    { id: 2, title: 'Build something fun!', completed: false, color: 'blue' }
-  ],
+  todos: [],
   filters: {
-    status: 'All',
+    status: "All",
     colors: []
   }
 }
 
 export default function todoReducer(state = todoAppState, action) {
   switch (action.type) {
+    case "SET_TODOS":
+      return {...state, ...action.payload};
     case "DELETE_TODO":
       return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) };
     case "ADD_TODO":
@@ -61,6 +60,14 @@ export function addToDo(title, color) {
   return { type: "ADD_TODO", payload: { id: shortid.generate(), title, color } }
 }
 
+export const getTodosAsync = () => {
+  return async (dispatch) => {
+    const response = await todosAPI.getTodos();
+    console.log("response: ", response.data)
+    dispatch(setTodos(response.data))
+  }
+}
+
 export function toggleComplete(id) {
   return { type: "TOGGLE_COMPLETE", payload: { id } }
 }
@@ -84,3 +91,8 @@ export function markAllCompleted() {
 export function clearCompleted() {
   return { type: "CLEAR_COMPLETED" };
 }
+
+const setTodos = (todos) => ({
+  type: "SET_TODOS",
+  payload: todos
+})
