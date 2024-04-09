@@ -1,5 +1,5 @@
 import React from 'react'
-import Todos from './Todos'
+import TodoApp from './TodoApp'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         </section>
       </nav>
       <h2>Todos</h2>
-      <Todos/>
+      <TodoApp/>
     </main>
   )
 }
