@@ -5,7 +5,7 @@ import { deleteTodoAsync, getTodosAsync, toggleColor, toggleColorAsync, toggleCo
 export default function TodoList() {
   const todos = useSelector((state) => state.todos);
   const filters = useSelector((state) => state.filters)
-  console.log("todos: ", todos)
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {

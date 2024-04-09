@@ -20,18 +20,14 @@ switch (action.type){
 }
 
 export const changeStatusFilterAsync = (status) => {
-  console.log("changeStatusFilterAsync triggered...")
   return async (dispatch) => {
-    console.log("changeStatusFilterAsync returned...")
     await filterAPI.changeStatusFilter(status);
     dispatch(changeStatusFilter(status));
   }
 }
 
 export const changeColorFilterAsync = (colors) => {
-  console.log("changeColorFilterAsync triggered...")
   return async (dispatch) => {
-    console.log("changeColorFilterAsync returned...")
     await filterAPI.changeColorFilter(colors);
     dispatch(changeColorFilter(colors));
   }
