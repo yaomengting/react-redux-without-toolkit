@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToDo, toggleComplete, toggleColor, markAllCompleted, clearCompleted, getTodosAsync, addTodoAsync, deleteTodoAsync, toggleCompleteAsync } from './redux/reducers/todoReducer';
-import {changeStatusFilter, changeColorFilter} from './redux/reducers/filterReducer';
+import { toggleColor, markAllCompleted, clearCompleted, getTodosAsync, addTodoAsync, deleteTodoAsync, toggleCompleteAsync } from './redux/reducers/todoReducer';
 import FilterStatus from './components/filter/FilterStatus';
+import FilterColor from './components/filter/FilterColor';
+import AddTodoForm from './components/todo/AddTodoForm';
 export default function Todos() {
   const todos = useSelector((state) => state.todos);
   const filters = useSelector((state) => state.filters)
@@ -12,7 +13,7 @@ export default function Todos() {
   useEffect(() => {
     dispatch(getTodosAsync());
   }, [dispatch]);
-  const [title, setTitle] = useState('');
+ 
   const [color, setColor] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);
   const incompleteTodosCount = todos.filter(todo => !todo.completed).length;
@@ -34,23 +35,13 @@ export default function Todos() {
     dispatch(deleteTodoAsync(todo.id))
   }
 
-  function handleAddToDo() {
-    dispatch(addTodoAsync(title))
-  }
+
   function handleToggleComplete(todo) {
     dispatch(toggleCompleteAsync(todo.id))
   }
 
   function handleToggleColor(todo, color) {
     dispatch(toggleColor(todo.id, color))
-  }
-
-  function handleColorFilterChange(color) {
-    const newSelectedColors = selectedColors.includes(color)
-      ? selectedColors.filter(c => c !== color)
-      : [...selectedColors, color];
-    setSelectedColors(newSelectedColors);
-    dispatch(changeColorFilter(newSelectedColors));
   }
 
   function handleMarkAllCompleted() {
@@ -63,10 +54,7 @@ export default function Todos() {
 
   return (
     <div className="todoapp">
-      <div className="input-container">
-        <input className='new-todo' placeholder="What needs to be done?" value={title} onChange={e => setTitle(e.target.value)} />
-        <button onClick={handleAddToDo}>Add a New To Do</button>
-      </div>
+      <AddTodoForm />
       <ul className='todo-list'>
         {filteredTodos.map(todo => {
           return (
@@ -99,23 +87,7 @@ export default function Todos() {
       <div>{incompleteTodosCount} items left</div>
       </div>
       <FilterStatus />
-
-      <div className="color-filters">
-      <h5>Filter by Color</h5>
-        {['purple', 'blue', 'green', 'orange', 'red'].map(color => (
-          <div key={color}>
-            <input
-              type="checkbox"
-              id={color}
-              checked={filters.colors.includes(color)}
-              onChange={() => {
-                handleColorFilterChange(color)
-              }}
-            />
-            <label htmlFor={color}>{color}</label>
-          </div>
-        ))}
-      </div>
+      <FilterColor />
       
     
       </footer>

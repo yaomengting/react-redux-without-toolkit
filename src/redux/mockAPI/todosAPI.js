@@ -1,25 +1,20 @@
 import shortid from "shortid";
 import { toggleComplete } from "../reducers/todoReducer";
 
-const initialState = {
-  todos: [
+const todos = [
     { id: shortid.generate(), title: "Learn about coding", completed: false, color: "" },
     { id: shortid.generate(), title: "Cook & clean", completed: false, color: "" },
     { id: shortid.generate(), title: "Eat", completed: false, color: "" },
     { id: shortid.generate(), title: "Sleep", completed: false, color: "" },
-  ],
-  filters: {
-    status: 'All',
-    colors: []
-  }
-};
+  ]
+
 
 const todosAPI = {
   getTodos: async ()=> {
     return {
       success: true,
       message: "Got todos and filters",
-      data: structuredClone(initialState) 
+      data: structuredClone(todos) 
     }
   },
   addTodo: async (title, color = '') => {
@@ -29,7 +24,7 @@ const todosAPI = {
       completed: false,
       color
     };
-    initialState.todos.push(newTodo);
+   todos.push(newTodo);
     return {
       success: true,
       message: "New To do added",
@@ -38,8 +33,8 @@ const todosAPI = {
 
   },
   deleteTodo: async (id) => {
-    const index = initialState.todos.findIndex((todo) => todo.id === id);
-    initialState.todos.splice(index, 1);
+    const index = todos.findIndex((todo) => todo.id === id);
+    todos.splice(index, 1);
     return {
       success: true,
       message: "Todo deleted",
@@ -47,8 +42,8 @@ const todosAPI = {
     }
   },
   toggleComplete: async (id) => {
-    const index = initialState.todos.findIndex((todo) => todo.id === id);
-    initialState.todos[index].completed = !initialState.todos[index].completed;
+    const index = todos.findIndex((todo) => todo.id === id);
+    todos[index].completed = !todos[index].completed;
     return {
       success: true,
       message: "Complete status toggled to opposite",

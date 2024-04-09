@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeStatusFilter } from '../../redux/reducers/filterReducer';
 
 export default function FilterStatus(){
-  const filters = useSelector((state) => state);
+  const filters = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   function handleStatusFilterChange(e){
     dispatch(changeStatusFilter(e.target.value))

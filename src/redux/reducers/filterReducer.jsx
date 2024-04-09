@@ -12,6 +12,8 @@ switch (action.type){
         ...state,
         colors: action.payload
     };
+  default:
+    return state;
 }
 }
 

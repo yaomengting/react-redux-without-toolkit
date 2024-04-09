@@ -7,24 +7,24 @@ export default function todoReducer(state = todos, action) {
     case "SET_TODOS":
       return action.payload;
     case "DELETE_TODO":
-      return todos.filter(todo => todo.id !== action.payload);
+      return state.filter(todo => todo.id !== action.payload);
     case "ADD_TODO":
-      return [...state.todos, action.payload];
+      return [...state, action.payload];
     case "TOGGLE_COMPLETE":
-      return todos.map(todo =>
+      return state.map(todo =>
           todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
         )
       ;
     case "TOGGLE_COLOR":
-      return todos.map(todo =>
+      return state.map(todo =>
           todo.id === action.payload.id ? { ...todo, color: action.payload.color } : todo
         )
       ; 
     case "MARK_ALL_COMPLETED":
-      return todos.map(todo => ({ ...todo, completed: true }))
+      return state.map(todo => ({ ...todo, completed: true }))
       ;
     case "CLEAR_COMPLETED":
-      return todos.filter(todo => !todo.completed);
+      return state.filter(todo => !todo.completed);
     default:
       return state;
   }
