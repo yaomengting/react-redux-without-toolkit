@@ -35,6 +35,15 @@ const todosAPI = {
       data: newTodo
     }
 
+  },
+  deleteTodo: async (id) => {
+    const index = initialState.findIndex((todo) => todo.id === id);
+    const deletedTodo = initialState.todos.splice(index, 1)[0];
+    return {
+      success: true,
+      message: "Todo deleted",
+      data: deletedTodo
+    }
   }
 
 

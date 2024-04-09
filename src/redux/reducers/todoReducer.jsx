@@ -76,6 +76,13 @@ export const addTodoAsync = (title) => {
   }
 }
 
+export const deleteTodoAsync = (id) => {
+  return async (dispatch) => {
+    const response = await todosAPI.deleteTodo(id);
+    dispatch(deleteTodo(response.data));
+  }
+}
+
 export function toggleComplete(id) {
   return { type: "TOGGLE_COMPLETE", payload: { id } }
 }
@@ -107,5 +114,10 @@ const setTodos = (todos) => ({
 
 const addTodo = (todo) => ({
   type: "ADD_TODO",
+  payload: todo
+})
+
+const deleteTodo = (todo) => ({
+  type: "DELETE_TODO",
   payload: todo
 })
