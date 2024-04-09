@@ -1,4 +1,5 @@
 import shortid from "shortid";
+import { toggleComplete } from "../reducers/todoReducer";
 
 const initialState = {
   todos: [
@@ -42,6 +43,15 @@ const todosAPI = {
     return {
       success: true,
       message: "Todo deleted",
+      data: id
+    }
+  },
+  toggleComplete: async (id) => {
+    const index = initialState.todos.findIndex((todo) => todo.id === id);
+    initialState.todos[index].completed = !initialState.todos[index].completed;
+    return {
+      success: true,
+      message: "Complete status toggled to opposite",
       data: id
     }
   }

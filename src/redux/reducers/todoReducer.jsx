@@ -83,6 +83,13 @@ export const deleteTodoAsync = (id) => {
   }
 }
 
+export const toggleCompleteAsync = (id) => {
+  return async (dispatch) => {
+    const response = await todosAPI.toggleComplete(id);
+    dispatch(toggleComplete(response.data))
+  }
+}
+
 export function toggleComplete(id) {
   return { type: "TOGGLE_COMPLETE", payload: { id } }
 }
