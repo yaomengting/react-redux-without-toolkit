@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToDo, toggleComplete, toggleColor, markAllCompleted, clearCompleted, getTodosAsync, addTodoAsync, deleteTodoAsync, toggleCompleteAsync } from './redux/reducers/todoReducer';
 import {changeStatusFilter, changeColorFilter} from './redux/reducers/filterReducer';
+import FilterStatus from './components/filter/FilterStatus';
 export default function Todos() {
-  const { todos, filters } = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.todos);
+  const filters = useSelector((state) => state.filters)
   console.log("todos: ", todos)
   const dispatch = useDispatch();
 
@@ -41,10 +43,6 @@ export default function Todos() {
 
   function handleToggleColor(todo, color) {
     dispatch(toggleColor(todo.id, color))
-  }
-
-  function handleStatusFilterChange(e) {
-    dispatch(changeStatusFilter(e.target.value))
   }
 
   function handleColorFilterChange(color) {
@@ -100,20 +98,7 @@ export default function Todos() {
       <h5>Remaining Todos</h5>
       <div>{incompleteTodosCount} items left</div>
       </div>
-      <div className="filter-by-status">
-  <h5>Filter by Status</h5>
-  <div className="status-options">
-    <label>
-      <input type="radio" name="status" value="All" checked={filters.status === 'All'} onChange={handleStatusFilterChange} /> All
-    </label>
-    <label>
-      <input type="radio" name="status" value="Active" checked={filters.status === 'Active'} onChange={handleStatusFilterChange} /> Active
-    </label>
-    <label>
-      <input type="radio" name="status" value="Completed" checked={filters.status === 'Completed'} onChange={handleStatusFilterChange} /> Completed
-    </label>
-  </div>
-</div>
+      <FilterStatus />
 
       <div className="color-filters">
       <h5>Filter by Color</h5>
