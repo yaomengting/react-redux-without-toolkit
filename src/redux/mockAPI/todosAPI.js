@@ -37,12 +37,12 @@ const todosAPI = {
 
   },
   deleteTodo: async (id) => {
-    const index = initialState.findIndex((todo) => todo.id === id);
-    const deletedTodo = initialState.todos.splice(index, 1)[0];
+    const index = initialState.todos.findIndex((todo) => todo.id === id);
+    initialState.todos.splice(index, 1);
     return {
       success: true,
       message: "Todo deleted",
-      data: deletedTodo
+      data: id
     }
   }
 
