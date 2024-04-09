@@ -71,17 +71,19 @@ export const toggleColorAsync = (id, color) => {
   return async (dispatch) => {
     console.log(" toggleColorAsync returned...")
     const response = await todosAPI.toggleColor(id, color);
-    console.log("response: ", response)
+    
     dispatch(toggleColor(response.data.id, response.data.color));
   }
 }
 
-export function toggleComplete(id) {
-  return { type: "TOGGLE_COMPLETE", payload: { id } }
-}
-
-export function toggleColor(id, color) {
-  return { type: "TOGGLE_COLOR", payload: { id, color } }
+export const markAllCompletedAsync = () => {
+  console.log(" markAllCompletedAsync triggered...")
+  return async (dispatch) => {
+    console.log(" markAllCompletedAsync returned...")
+    const response = await todosAPI.markAllCompleted();
+    console.log("response: ", response)
+    dispatch(markAllCompleted());
+  }
 }
 
 
@@ -107,3 +109,11 @@ const deleteTodo = (todo) => ({
   type: "DELETE_TODO",
   payload: todo
 })
+
+export function toggleComplete(id) {
+  return { type: "TOGGLE_COMPLETE", payload: { id } }
+}
+
+export function toggleColor(id, color) {
+  return { type: "TOGGLE_COLOR", payload: { id, color } }
+}

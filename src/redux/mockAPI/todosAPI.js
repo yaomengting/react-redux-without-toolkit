@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { toggleColor } from "../reducers/todoReducer";
+import { markAllCompleted, toggleColor } from "../reducers/todoReducer";
 
 const todos = [
     { id: shortid.generate(), title: "Learn about coding", completed: false, color: "" },
@@ -57,6 +57,14 @@ const todosAPI = {
       success: true,
       message: "Complete toggle color",
       data: {id, color}
+    }
+  },
+  markAllCompleted: async()=>{
+    todos.map(todo => ({ ...todo, completed: true }))
+    return {
+      success: true,
+      message: "mark All To do Completed",
+      data: todos
     }
   }
   
