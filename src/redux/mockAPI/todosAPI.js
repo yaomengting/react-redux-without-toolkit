@@ -21,6 +21,21 @@ const todosAPI = {
       data: structuredClone(initialState) 
     }
   },
+  addTodo: async (title, color = '') => {
+    const newTodo = {
+      id: shortid.generate(),
+      title,
+      completed: false,
+      color
+    };
+    initialState.todos.push(newTodo);
+    return {
+      success: true,
+      message: "New To do added",
+      data: newTodo
+    }
+
+  }
 
 
 }

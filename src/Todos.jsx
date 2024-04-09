@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToDo, toggleComplete, toggleColor, changeStatusFilter, changeColorFilter, markAllCompleted, clearCompleted, getTodosAsync } from './redux/reducers/todoReducer';
+import { addToDo, toggleComplete, toggleColor, changeStatusFilter, changeColorFilter, markAllCompleted, clearCompleted, getTodosAsync, addTodoAsync } from './redux/reducers/todoReducer';
 export default function Todos() {
   const { todos, filters } = useSelector((state) => state.todos);
   console.log("todos: ", todos)
@@ -32,7 +32,7 @@ export default function Todos() {
   }
 
   function handleAddToDo() {
-    dispatch(addToDo(title, color))
+    dispatch(addTodoAsync(title, color))
   }
   function handleToggleComplete(todo) {
     dispatch(toggleComplete(todo.id))

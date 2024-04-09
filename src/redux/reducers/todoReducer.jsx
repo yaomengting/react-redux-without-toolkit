@@ -56,15 +56,23 @@ export default function todoReducer(state = todoAppState, action) {
 
 }
 
-export function addToDo(title, color) {
-  return { type: "ADD_TODO", payload: { id: shortid.generate(), title, color } }
-}
+// export function addToDo(title, color) {
+//   return { type: "ADD_TODO", payload: { id: shortid.generate(), title, color } }
+// }
 
 export const getTodosAsync = () => {
   return async (dispatch) => {
     const response = await todosAPI.getTodos();
-    console.log("response: ", response.data)
+   
     dispatch(setTodos(response.data))
+  }
+}
+
+export const addTodoAsync = (title) => {
+  return async (dispatch) => {
+    const response = await todosAPI.addTodo(title);
+    console.log("response.data: ", response.data);
+    dispatch(addTodo(response.data))
   }
 }
 
@@ -95,4 +103,9 @@ export function clearCompleted() {
 const setTodos = (todos) => ({
   type: "SET_TODOS",
   payload: todos
+})
+
+const addTodo = (todo) => ({
+  type: "ADD_TODO",
+  payload: todo
 })
