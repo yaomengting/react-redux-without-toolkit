@@ -1,4 +1,3 @@
-import shortid from "shortid";
 import todosAPI from "../mockAPI/todosAPI";
 const todos = []
 
@@ -31,37 +30,49 @@ export default function todoReducer(state = todos, action) {
 
 }
 
-// export function addToDo(title, color) {
-//   return { type: "ADD_TODO", payload: { id: shortid.generate(), title, color } }
-// }
-
 export const getTodosAsync = () => {
+  console.log("getTodosAsync triggered...")
   return async (dispatch) => {
+    console.log("getTodosAsync returned...")
     const response = await todosAPI.getTodos();
-   
     dispatch(setTodos(response.data))
   }
 }
 
 export const addTodoAsync = (title) => {
+  console.log(" addTodoAsync triggered...")
   return async (dispatch) => {
+    console.log(" addTodoAsync returned...")
     const response = await todosAPI.addTodo(title);
-    console.log("response.data: ", response.data);
     dispatch(addTodo(response.data))
   }
 }
 
 export const deleteTodoAsync = (id) => {
+  console.log(" deleteTodoAsync triggered...")
   return async (dispatch) => {
+    console.log(" deleteTodoAsync returned...")
     const response = await todosAPI.deleteTodo(id);
     dispatch(deleteTodo(response.data));
   }
 }
 
 export const toggleCompleteAsync = (id) => {
+  console.log(" toggleCompleteAsync triggered...")
   return async (dispatch) => {
+    console.log(" toggleCompleteAsync returned...")
     const response = await todosAPI.toggleComplete(id);
     dispatch(toggleComplete(response.data))
+  }
+}
+
+export const toggleColorAsync = (id, color) => {
+  console.log(" toggleColorAsync triggered...")
+  return async (dispatch) => {
+    console.log(" toggleColorAsync returned...")
+    const response = await todosAPI.toggleColor(id, color);
+    console.log("response: ", response)
+    dispatch(toggleColor(response.data.id, response.data.color));
   }
 }
 

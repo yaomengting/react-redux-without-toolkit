@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTodoAsync, getTodosAsync, toggleColor, toggleCompleteAsync } from '../../redux/reducers/todoReducer';
+import { deleteTodoAsync, getTodosAsync, toggleColor, toggleColorAsync, toggleCompleteAsync } from '../../redux/reducers/todoReducer';
 
 export default function TodoList() {
   const todos = useSelector((state) => state.todos);
@@ -34,7 +34,7 @@ export default function TodoList() {
   }
 
   function handleToggleColor(todo, color) {
-    dispatch(toggleColor(todo.id, color))
+    dispatch(toggleColorAsync(todo.id, color))
   }
 
   return (

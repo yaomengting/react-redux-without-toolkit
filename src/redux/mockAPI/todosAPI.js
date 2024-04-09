@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { toggleComplete } from "../reducers/todoReducer";
+import { toggleColor } from "../reducers/todoReducer";
 
 const todos = [
     { id: shortid.generate(), title: "Learn about coding", completed: false, color: "" },
@@ -50,6 +50,15 @@ const todosAPI = {
       data: id
     }
   },
+  toggleColor: async (id, color) => {
+    const index = todos.findIndex((todo) => todo.id === id);
+    todos[index].color = color;
+    return {
+      success: true,
+      message: "Complete toggle color",
+      data: {id, color}
+    }
+  }
   
 
 
